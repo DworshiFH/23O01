@@ -111,6 +111,22 @@ p{
     }
 }
 
+#login{
+    position: fixed;
+    width: 50px;
+    height: 30px;
+    right: 45px;
+    top: 5px;
+}
+
+#signup{
+    position: fixed;
+    width: 65px;
+    height: 30px;
+    right: 100px;
+    top: 5px;
+}
+
 
 
 
