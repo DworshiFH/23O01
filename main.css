@@ -49,14 +49,20 @@ header{
 
 aside{
     box-sizing: border-box;
-    position: fixed;
-    top: 50px;
+    float: right;
+    margin-top: 40px;
+    top: 150px;
     right: 10px;
-    width: 140px;
-    height: 90%;
+    width: 115px;
+    height: 800px;
     background-color: lightgrey;
     border-color: black;
     border-style: ridge;
+    z-index: 0;
+}
+
+#werbung{
+    z-index: 0;
 }
 
 img{
@@ -77,9 +83,10 @@ img{
     padding-right: 150px;
     padding-top: 40px;
     grid-row-gap: 5px;
-    grid-column-gap: 5px;
+    grid-column-gap: 10px;
     vertical-align: middle;
     max-width: 1500px;
+    min-width: 650px;
 }
 
 .left,.right{
@@ -103,7 +110,9 @@ p{
 }
 
 @media (max-width: 600px) {
-
+    aside{
+        visibility: hidden;
+    }
     .grid-container  {
         grid-template-areas:
         'left'
@@ -131,7 +140,7 @@ p{
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 99; /* Stay on top */
     top: 0;
     right: 0;
     background-color: #111; /* Black*/
