@@ -2,9 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <!--script src="birthdayValidator.js"></script-->
 </head>
 <body>
+
+    <h1 id="codename">23Ω01 <br>
+    Sign Up Page</h1>
+
+<main class="grid-container">
+
+    <form class="box" action="main.html">
+
+    <label for="firstName">
+    <input type="text" id="firstName" placeholder="First Name" required></label>
+
+    <label for="lastName">
+    <input type="text" id="lastName" placeholder="Last Name" required></label>
+
+    <label for="email">
+    <input type="email" id="email" placeholder="Email" required></label>
+
+    <label for="password">
+    <input type="password" id="password" placeholder="Password" required></label>
+
+    <label for="passwordConfirm">
+    <input type="password" id="passwordConfirm" placeholder="Confirm Password" required></label>
+
+    <label for="birthday">
+    <input type="date" id="birthday" required></label>
+    <p id="birthdayText">Date of Birth</p>    
+
+    <div>
+        <input id="signUp" type="submit" value="Let's Party!">
+    </div>
+
+    </form>
+
+</main>
 
 </body>
 </html>

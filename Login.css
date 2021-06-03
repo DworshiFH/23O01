@@ -1,57 +1,86 @@
-head, body{
-    background-color: #06506b;
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
 }
 
-h1{
-    padding-top: 150px;
+.box, .grid-container{
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
     text-align: center;
-    font-size: 50px;
-}
-
-.grid-container{
-    display: grid;
-    background-color: white;
-    position: fixed;
-    grid-template-areas: 'center';
-    margin-left: 700px;
-    width: 500px;
-    padding-top: 50px;
-    justify-content: center;
-    align-self: center;
-    text-align: center;
-    margin-bottom: 350px;
-    grid-row-gap: 5px;
-    grid-column-gap: 5px;
-    vertical-align: middle;
-    horiz-align: center;
-    border: 2px solid #000000;
-    height: 500px;
-}
-
-#logintext{
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: -50px;
-}
-
-label1, input{
-    margin-top: 30px;
-    text-align: center;
-    height: 30px;
-    width: 325px;
-    font-size: 17px;
-}
-
-#login{
-    width: 335px;
-    margin-top: 60px;
 }
 
 #noaccount{
-    font-size: 20px;
+    position: absolute;
+    padding-top: 70px;
+    padding-left: 53px;
+    text-align: center;
+    color: #3498db;
 }
 
-#login:hover{
+#href_to_signup:visited, href_to_signup:link, href_to_signup:hover, href_to_signup:active{
+    color: #3498db;
+}
+
+#logintext{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.box input[type = "email"], .box input[type = "password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.2s;
+}
+
+.box input[type = "email"]:focus, .box input[type = "password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
+}
+
+.box input[type = "submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.2s;
     cursor: pointer;
+}
+
+.box input[type = "submit"]:hover{
+    background: #2ecc71;
+}
+
+#codename{
+    padding: 40px;
+    position: absolute;
+    top: 10%;
+    left: 42%;
+    color: white;
+    text-align: center;
+    font-size: 70px;
+    z-index: 999;
 }
