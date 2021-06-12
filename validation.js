@@ -26,8 +26,8 @@ const loginValidation = data => {
 const eventValidation = data => {
     const schema = Joi.object({
     location: Joi.string().min(2).required(),
-    postalcode: Joi.string().min(4).required(),
-    numberofguests: Joi.string().required()
+    postalcode: Joi.number().min(1000).required(),
+    numberofguests: Joi.number()
     });
 
     //Data Validation
