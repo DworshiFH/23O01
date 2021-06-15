@@ -3,14 +3,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let FE_ID = 1;
 
     class Event{
-        constructor(eventTitle, eventDesc, eventLocation) {
+        constructor(eventTitle, eventDesc, eventLocation, eventPostalCode) {
             FE_ID++;
             this.FE_ID = FE_ID;
-            this.eventTitle = eventTitle;
-            this.eventDesc = eventDesc;
-            this.eventLocation = eventLocation;
+            this.eventTitle = eventTitle; //string
+            this.eventDesc = eventDesc; //string
+            this.eventLocation = eventLocation; //string
+            this.eventPostalCode = eventPostalCode; //int
+            this.eventPostingDate = null;
         }
     }
+
+    module.exports(Event);
 
     class Dashboard {
         constructor() {
@@ -29,7 +33,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.onload = function () {
                     let JSONEvent = request.response;
 
-                    event.eventTitle = JSONEvent["eventTitle"];
+                    event.eventTitle = JSONEvent["title"]; //string
+                    event.eventDesc = JSONEvent["description"]; //string
+                    event.eventLocation = JSONEvent["location"]; //string
+                    event.eventPostalCode = JSONEvent["postalcode"]; //int
+                    event.eventPostingDate = JSONEvent["Date"];
                     //TODO implement rest of JSON to object translation
 
                     dashboard.addEventToScreen(event);
@@ -47,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         addEventToScreen(event){
             this.article = document.createElement("article");
 
-            if(event.FE_ID % 2 ==0){
+            if(event.FE_ID % 2 ===0){
                 this.article.class = "right";
 
             } else {
@@ -58,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             /*this.eventImg = document.createElement("img");
             this.eventImg.src = event.eventImg;
             this.article.appendChild(this.eventImg);*/
+            var eventURL = '#main.html'
 
             this.p1 = document.createElement("p");
             this.p1.textContent = event.eventTitle;
@@ -79,6 +88,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.buttontext = document.createTextNode("Show Event");
             this.button.onclick = event => {
                 //TODO call function to go to Event Page
+
+
+
             };
             this.button.appendChild(this.buttontext);
             this.p4.appendChild(this.button);
