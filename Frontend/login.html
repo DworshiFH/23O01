@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
-    <!--script src="./index.js"></script-->
-    <script src="../login.js"></script>
 </head>
 <body>
 
@@ -17,7 +15,7 @@
         <p id="logintext">LogIn</p>
     </article>
 
-    <form class="box" id="login_post" action="main.html" method="POST">
+    <form class="box" action="http://localhost:3000/login" method="POST">
 
     <label1 for="email">
     <input type="email" id="email" placeholder="Email" name="email" required></label1>
@@ -26,10 +24,33 @@
     <input type="password" id="password" placeholder="Password" name="password" required></label1>
 
     <div>
-        <input id="login" type="submit" value="Let's Party!">
+        <input id="signUp" type="submit" value="Let's Party!">
     </div>
 
     </form>
+
+    <!--form class="box" action="http://localhost:3000/register" method="POST">
+
+        <label for="firstName">
+        <input type="text" id="firstName" placeholder="First Name" name="firstname" required></label>
+    
+        <label for="lastName">
+        <input type="text" id="lastName" placeholder="Last Name" name="lastname" required></label>
+    
+        <label for="email">
+        <input type="email" id="email" placeholder="Email" name="email" required></label>
+    
+        <label for="password">
+        <input type="password" id="password" placeholder="Password" name="password" required></label>
+    
+        <label for="passwordConfirm">
+        <input type="password" id="passwordConfirm" placeholder="Confirm Password" name="passwordconfirm" required></label>
+    
+        <div>
+            <input id="signUp" type="submit" value="Let's Party!">
+        </div>
+
+    </form-->
 
     <p id="noaccount">Need an account?
     <a href="Signup.html" id="href_to_signup"> Sign up! </a></p>

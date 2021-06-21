@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const User = require('../Model/User');
+const User = require('./Model/User');
 const jwt = require('jsonwebtoken');
-const {registerValidation, loginValidation} = require('../validation');
+const {registerValidation, loginValidation} = require('./validation');
 const bcrypt = require('bcryptjs');
+const verify = require('./Routes/verifyToken');
+const path = require('path');
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -28,11 +30,15 @@ router.post('/register', async (req, res) => {
     try{
         const savedUser = await user.save();
         res.send('Added user with ID: ' + user._id);
-        return res.redirect('../Frontend/main.html');
+        //return res.redirect('../Frontend/main.html');
     }
     catch(err){
         res.status(400).send(err);
     }
+});
+
+router.get('/register', async (req, res) => {
+    res.sendFile(path.join(__dirname, './Frontend/signup.html'));
 });
 
 
@@ -52,10 +58,15 @@ router.post('/login', async (req, res) => {
     //Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send(token);
+    
 });
 
+router.get('/login', async (req, res) => {
+    res.sendFile(path.join(__dirname, "./Frontend/login.html"));
+})
+
 //Get User by id
-router.get('/:id', async(req, res) => {
+router.get('/user/:id', verify, async(req, res) => {
     try{
     const user = await User.findById(req.params.id);
     if(!user) return res.status(400).send('User not found!');
@@ -66,6 +77,5 @@ router.get('/:id', async(req, res) => {
         return res.status(400).send(error);
     }
 })
-
 
 module.exports = router;
