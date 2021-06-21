@@ -4,7 +4,7 @@ const registerValidation = data => {
     const schema = Joi.object({
     firstname: Joi.string().min(2).max(255).required(),
     lastname: Joi.string().min(2).max(255).required(),
-    email: Joi.string().min(6).required().email(),
+    email: Joi.string().min(6).email().required,
     password: Joi.string().min(6).required(),
     passwordconfirm: Joi.string().min(6)
     });
@@ -27,7 +27,9 @@ const eventValidation = data => {
     const schema = Joi.object({
     location: Joi.string().min(2).required(),
     postalcode: Joi.number().min(1000).required(),
-    numberofguests: Joi.number()
+    numberofguests: Joi.number(),
+    title: Joi.string().min(2).max(255).required(),
+    description: Joi.string().max(1024)
     });
 
     //Data Validation

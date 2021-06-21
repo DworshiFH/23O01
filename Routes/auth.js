@@ -14,9 +14,6 @@ router.post('/register', async (req, res) => {
     const emailExist = await User.findOne({email: req.body.email});
     if (emailExist) return res.status(400).send('This email is already registered!');
 
-    //Check if passwords are the same
-    if(req.body.password !== req.body.passwordconfirm) return res.status(400).send('The passwords do not match!');
-
     //Hashing the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -31,6 +28,7 @@ router.post('/register', async (req, res) => {
     try{
         const savedUser = await user.save();
         res.send('Added user with ID: ' + user._id);
+        return res.redirect('../Frontend/main.html');
     }
     catch(err){
         res.status(400).send(err);
@@ -55,6 +53,19 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send(token);
 });
+
+//Get User by id
+router.get('/:id', async(req, res) => {
+    try{
+    const user = await User.findById(req.params.id);
+    if(!user) return res.status(400).send('User not found!');
+
+    res.json({firstname: user.firstname, lastname: user.lastname, email: user.email, password: user.password});
+    }
+    catch(error){
+        return res.status(400).send(error);
+    }
+})
 
 
 module.exports = router;

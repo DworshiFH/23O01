@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
-    <script src="./index.js"></script>
+    <link rel="stylesheet" href="login.css">
+    <!--script src="./index.js"></script-->
+    <script src="../login.js"></script>
 </head>
 <body>
 
@@ -16,13 +17,13 @@
         <p id="logintext">LogIn</p>
     </article>
 
-    <form class="box" action="auth.js" method="POST">
+    <form class="box" id="login_post" action="main.html" method="POST">
 
     <label1 for="email">
-    <input type="email" id="email" placeholder="Email" required></label1>
+    <input type="email" id="email" placeholder="Email" name="email" required></label1>
 
     <label1 for="password">
-    <input type="password" id="password" placeholder="Password" required></label1>
+    <input type="password" id="password" placeholder="Password" name="password" required></label1>
 
     <div>
         <input id="login" type="submit" value="Let's Party!">
