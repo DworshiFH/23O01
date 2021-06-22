@@ -11,6 +11,7 @@
 
 
 
+app.use(session({secret: "password"})) //TODO make randomly generated secret
 
 
 
@@ -29,3 +30,10 @@ viewRoutes.post('/login', function (req, res) {
         });
     }
 });
+
+viewRoutes.get('/logout', function (req, res){
+    res.send("By" + req.body.id + sess.id);
+    req.session.destroy( function () {
+        console.log("user logged out");
+    })
+})

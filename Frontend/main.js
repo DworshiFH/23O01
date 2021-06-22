@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.eventDesc = eventDesc; //string
             this.eventLocation = eventLocation; //string
             this.eventPostalCode = eventPostalCode; //int
-            this.eventPostingDate = null;
+            //this.eventPostingDate = null;
         }
     }
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let loadNewEvent = function (eventID){
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/"; //TODO add URL, talk to BIG DICK RICHARD
+                let requestURL = "http://localhost:3000/event/";
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     event.eventPostalCode = JSONEvent["postalcode"]; //int
                     event.numberOfGuests = JSONEvent["numberofguests"];
                     event.user = JSONEvent["user"];
-                    event.eventPostingDate = JSONEvent["Date"];
+                    //event.eventPostingDate = JSONEvent["Date"];
                     //TODO implement rest of JSON to object translation
 
                     dashboard.addEventToScreen(event);
@@ -59,18 +59,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.article = document.createElement("article");
             this.mainEventScreen.appendChild(this.article);
 
-            /*if(event.FE_ID % 2 === 0){
+            if(event.FE_ID % 2 === 0){
                 this.article.class = "right";
             } else {
                 this.article.class = "left";
-            }*/
+            }
 
             //TODO implement IMG storage in DB
             /*this.eventImg = document.createElement("img");
             this.eventImg.src = event.eventImg;
             this.article.appendChild(this.eventImg);*/
 
-            /*this.p1 = document.createElement("p");
+            this.p1 = document.createElement("p");
             this.p1.textContent = event.eventTitle;
             this.article.appendChild(this.p1);
             this.p2 = document.createElement("p");
@@ -79,19 +79,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.p3 = document.createElement("p");
             this.p3.textContent = event.eventLocation;
             this.article.appendChild(this.p3);
+            this.p4 = document.createElement("p");
+            this.p4.textContent = event.eventPostalCode;
+            this.article.appendChild(this.p4);
+            this.p5 = document.createElement("p");
+            this.p5.textContent = event.numberOfGuests;
+            this.article.appendChild(this.p5);
 
-            /***
-             * Button to go to Event Page
-             */
+            //TODO add button to go to event page
             /*this.p4 = document.createElement("p");
             this.button = document.createElement("button");
             this.button.type = "button";
             this.button.id = "showEventButton" + event.FE_ID;
             this.buttontext = document.createTextNode("Show Event");
             this.button.onclick = event => {
-                //TODO call function to go to Event Page
-
-
 
             };
             this.button.appendChild(this.buttontext);

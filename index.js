@@ -26,3 +26,4 @@ app.use(session({secret: process.env.SESSION_SECRET, saveUninitialized: true, re
 
 
 app.listen(3000, () => console.log('Server up and Running!'));
+
