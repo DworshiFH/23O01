@@ -33,16 +33,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.onload = function () {
                     let JSONProfile = request.response;
 
-                    event.eventTitle = JSONProfile["title"]; //string
+                    user.firstname = JSONProfile["firstname"]; //string
+                    user.lastname = JSONProfile["lastname"];
+                    user.email = JSONProfile["email"];
 
-                    profileScreen.addEventToScreen(event);
+                    profileScreen.addProfileToScreen(user);
                 }
             }
 
-            let loadEvents = function (eventID) {
+            let loadEvents = function (eventID, user) {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/";
+                let requestURL = "http://localhost:3000/event/"+user.userID;
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -59,11 +61,25 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
         addProfileToScreen(profile) {
+            this.main = document.getElementById("profileScreen");
 
+            this.article = document.createElement("article");
+            this.name = document.createElement("p");
+            this.name.textContent = profile.firstname + " " + profile.lastname;
+            this.article.appendChild(this.name);
+
+            this.email = document.createElement("p");
+            this.email.textContent = profile.email;
+            this.article.appendChild(this.email);
+
+            this.main.appendChild(this.article);
         }
 
         addEventToScreen(event) {
+            this.main = document.getElementById("profileScreen");
 
+            this.article = document.createElement("article");
+            this.name = document.createElement("p");
         }
     }
 
