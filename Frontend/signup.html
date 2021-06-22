@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="signup.css">
-    <!--script src="../signup.js"></script-->
+    <script src="./signup.js" defer></script>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
 
 <main class="grid-container">
 
-    <form class="box" action="http://localhost:3000/register" method="POST">
+    <form class="box" action="http://localhost:3000/user/register" method="POST" id="form">
 
     <label for="firstName">
     <input type="text" id="firstName" placeholder="First Name" name="firstname" required></label>

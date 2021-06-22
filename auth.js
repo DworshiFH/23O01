@@ -7,7 +7,7 @@ const verify = require('./Routes/verifyToken');
 const path = require('path');
 
 //REGISTER
-router.post('/register', async (req, res) => {
+router.post('/user/register', async (req, res) => {
     //Validation
     const {error} = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -43,7 +43,7 @@ router.get('/register', async (req, res) => {
 
 
 //LOGIN
-router.post('/login', async (req, res) => {
+router.post('/user/login', async (req, res) => {
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
