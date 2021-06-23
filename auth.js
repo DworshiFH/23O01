@@ -13,6 +13,7 @@ router.post('/user/register', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     //Check if the user already in the database
+    console.log(req.body);
     const emailExist = await User.findOne({email: req.body.email});
     if (emailExist) return res.status(400).send('This email is already registered!');
 
@@ -30,9 +31,11 @@ router.post('/user/register', async (req, res) => {
     try{
         const savedUser = await user.save();
         res.send('Added user with ID: ' + user._id);
-        //return res.redirect('../Frontend/main.html');
+        alert('Successfully Signep up!');
+        return res.redirect('../Frontend/main.html');
     }
     catch(err){
+        console.log("test");
         res.status(400).send(err);
     }
 });
@@ -58,6 +61,9 @@ router.post('/user/login', async (req, res) => {
     //Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send(token);
+
+    alert("Successfully logged in!");
+    return res.redirect('../Frontend/main.html');
     
 });
 
@@ -76,6 +82,10 @@ router.get('/user/:id', verify, async(req, res) => {
     catch(error){
         return res.status(400).send(error);
     }
+})
+
+router.get('/', async(req, res) =>{
+    res.sendFile(path.join(__dirname, './Frontend/main.html'));
 })
 
 module.exports = router;

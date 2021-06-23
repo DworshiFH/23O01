@@ -1,21 +1,39 @@
-/*const loginForm = document.getElementById("form");
-const loginButton = document.getElementById("form-submit");
-this.loginButton = document.createElement("Button");
-this.Button.appendChild("loginButton");
+const form = document.getElementById('signup-form');
+form.addEventListener('submit', signInUser);
 
+async function signInUser(event){
+    event.preventDefault();
 
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-
-loginButton.addEventListener("click", (e) =>{
-    e.preventDefault()();
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
-
-    if (username === "user" && password === "web_dev"){
-        alert("You have successfully logged in.");
-        window.location = "eventPage.html";
-    } else{
-        alert("Login failed. Try again with right credentials you dumbass >:-(");
-        location.reload();
+    if(!email.includes('@') || !email.includes('.') || email.length < 5) {
+        alert('Please provide a valid email!');
     }
-})*/
+    else if(password.length < 6){
+        alert('Your password is too short!');
+    }
+    else{
+        const toSend = JSON.stringify({
+            email: email,
+            password: password,
+        });
+
+        const result = await fetch('/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: toSend
+        })
+
+        if(result.ok === true){
+            alert('Succesfully logged in!');
+            window.location.replace('http://localhost:3000/');
+        }
+
+        else{
+            alert('Wrong Username or Password:(');
+        }
+    }
+}
