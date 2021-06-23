@@ -35,14 +35,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.onload = function () {
                     let JSONProfile = request.response;
 
-                    console.log(request.response);
-
                     user.firstname = JSONProfile["firstname"]; //string
                     user.lastname = JSONProfile["lastname"];
                     user.email = JSONProfile["email"];
                     user.userID = id;
-
-                    console.log(user);
 
                     profileScreen.addProfileToScreen(user);
                 }

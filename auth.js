@@ -58,6 +58,7 @@ router.post('/user/login', async (req, res) => {
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    res.header('token', token);
     return res.json({status: 'ok', data: token});
 });
 
@@ -82,7 +83,7 @@ router.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/main.html'));
 })
 
-router.get('/myprofile', (req, res) =>{
+router.get('/myprofile', verify, (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/profile.html'))
 })
 

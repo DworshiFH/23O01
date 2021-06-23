@@ -2,6 +2,54 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let eventsOnScreen = [];
     let FE_ID = 1;
 
+    const header = document.getElementById('header');
+    let token = localStorage.getItem('token');
+
+    if(token){
+        let button = document.createElement('button');
+        button.id = 'logout';
+        let buttonText = document.createTextNode('Logout');
+        button.appendChild(buttonText);
+        button.addEventListener('click', () =>{
+            localStorage.removeItem('token');
+            alert('Successfully logged out!');
+            window.location.replace('http://localhost:3000/');
+        });
+
+        header.appendChild(button);
+    }
+    else{
+        //Hiding the menu
+        let mySidebar = document.getElementById('mySidebar');
+        let button = document.getElementById('main');
+
+        button.style.visibility = 'hidden';
+        mySidebar.style.visibility = 'hidden';
+
+        //Creating the login and signup buttons
+        let loginButton = document.createElement('button');
+        let signUpButton = document.createElement('button');
+        let loginButtonText = document.createTextNode('Login');
+        let signUpButtonText = document.createTextNode('Sign Up');
+
+        loginButton.id = 'login';
+        signUpButton.id = 'signup';
+
+        loginButton.appendChild(loginButtonText);
+        signUpButton.appendChild(signUpButtonText);
+
+        loginButton.addEventListener('click', () =>{
+            window.location.replace('http://localhost:3000/login');
+        });
+
+        signUpButton.addEventListener('click', () =>{
+            window.location.replace('http://localhost:3000/register');
+        });
+
+        header.appendChild(loginButton);
+        header.appendChild(signUpButton);
+    }
+
     class Event{
         constructor(eventTitle, eventDesc, eventLocation, eventPostalCode) {
             FE_ID++;
@@ -13,8 +61,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //this.eventPostingDate = null;
         }
     }
-
-    //module.exports(Event);
 
     class Dashboard {
         constructor() {
