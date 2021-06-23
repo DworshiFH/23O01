@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-
+    const token = localStorage.getItem('token').split('.');
+    const jsonString = JSON.parse(atob(token[1]));
+    const id = jsonString._id.toString();
 
     class User{
         constructor(firstname, lastname, email, userID) {
@@ -22,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.profileScreen = document.getElementById("profileScreen");
 
             let loadNewProfile = function () {
-                let user = new User();
+                const user = new User();
 
-                let requestURL = "http://localhost:3000/";
+                let requestURL = "http://localhost:3000/user/" + id.toString();
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -33,18 +35,25 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.onload = function () {
                     let JSONProfile = request.response;
 
+                    console.log(request.response);
+
                     user.firstname = JSONProfile["firstname"]; //string
                     user.lastname = JSONProfile["lastname"];
                     user.email = JSONProfile["email"];
+                    user.userID = id;
+
+                    console.log(user);
 
                     profileScreen.addProfileToScreen(user);
                 }
             }
 
+            loadNewProfile();
+
             let loadEvents = function (eventID, user) {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/"+user.userID;
+                let requestURL = "http://localhost:3000/event/" + user.userID;
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -65,11 +74,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             this.article = document.createElement("article");
             this.name = document.createElement("p");
-            this.name.textContent = profile.firstname + " " + profile.lastname;
+            this.name.id = 'name';
+            this.nameText = document.createTextNode('Greetings ' + profile.firstname + ' ' + profile.lastname + '!');
+            this.name.appendChild(this.nameText);
             this.article.appendChild(this.name);
 
             this.email = document.createElement("p");
-            this.email.textContent = profile.email;
+            this.email.id = 'email';
+            this.emailText = document.createTextNode('Your email is: ' + profile.email);
+            this.email.appendChild(this.emailText);
             this.article.appendChild(this.email);
 
             this.main.appendChild(this.article);
@@ -84,5 +97,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     const profileScreen = new ProfileScreen();
-
 });

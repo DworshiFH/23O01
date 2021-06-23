@@ -134,3 +134,13 @@ p{
     display: block;
     text-align: left;
 }
+
+#name{
+    position: relative;
+    top: 120px;
+}
+
+#email{
+    position: relative;
+    margin-top: 10px;
+}

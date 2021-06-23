@@ -31,8 +31,6 @@ router.post('/user/register', async (req, res) => {
     try{
         const savedUser = await user.save();
         res.send('Added user with ID: ' + user._id);
-        alert('Successfully Signep up!');
-        return res.redirect('../Frontend/main.html');
     }
     catch(err){
         console.log("test");
@@ -60,11 +58,7 @@ router.post('/user/login', async (req, res) => {
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
-
-    alert("Successfully logged in!");
-    return res.redirect('../Frontend/main.html');
-    
+    return res.json({status: 'ok', data: token});
 });
 
 router.get('/login', async (req, res) => {
@@ -72,7 +66,7 @@ router.get('/login', async (req, res) => {
 })
 
 //Get User by id
-router.get('/user/:id', verify, async(req, res) => {
+router.get('/user/:id', async(req, res) => {
     try{
     const user = await User.findById(req.params.id);
     if(!user) return res.status(400).send('User not found!');
@@ -84,8 +78,12 @@ router.get('/user/:id', verify, async(req, res) => {
     }
 })
 
-router.get('/', async(req, res) =>{
+router.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/main.html'));
+})
+
+router.get('/myprofile', (req, res) =>{
+    res.sendFile(path.join(__dirname, './Frontend/profile.html'))
 })
 
 module.exports = router;

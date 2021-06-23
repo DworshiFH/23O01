@@ -25,9 +25,10 @@ async function signInUser(event){
                 'Content-Type': 'application/json'
             },
             body: toSend
-        })
+        }).then((res) => res.json());
 
-        if(result.ok === true){
+        if(result.status === 'ok'){
+            localStorage.setItem('token', result.data);
             alert('Succesfully logged in!');
             window.location.replace('http://localhost:3000/');
         }
