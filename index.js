@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const authRoute = require('./auth');
 const eventRoute = require('./Routes/events');
 const dotenv = require('dotenv');
-const session = require('express-session');
 
 dotenv.config();
 
@@ -22,7 +21,6 @@ app.use(express.static("Frontend"));
 app.use(express.static("/"));
 app.use('/', authRoute);
 app.use('/event', eventRoute);
-app.use(session({secret: process.env.SESSION_SECRET, saveUninitialized: true, resave: true}));
 
 
 app.listen(3000, () => console.log('Server up and Running!'));

@@ -22,7 +22,7 @@ async function signInUser(event){
         const result = await fetch('/user/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: toSend
         }).then((res) => res.json());

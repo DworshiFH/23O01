@@ -59,6 +59,16 @@ router.post('/user/login', async (req, res) => {
     //Create and assign a token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('token', token);
+
+    console.log(token);
+
+    //Add token to header for restricted routes
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    }
+
     return res.json({status: 'ok', data: token});
 });
 
