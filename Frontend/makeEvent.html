@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Posten</title>
+  <link rel="stylesheet" href="makeEvent.css">
+  <script src="./sidebar.js"></script>
+  <script src="./makeEvent.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1 id="title">Event Posten</h1>
+
+    <article id="search">
+      Nach Events suchen
+    </article>
+
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">Mein Profil</a>
+      <a href="#">Party Erstellen</a>
+      <a href="#">Freunde</a>
+      <a href="#">Kontakt</a>
+    </div>
+
+    <div id="main">
+      <button id="profile" onclick="openNav()">&#9776;</button>
+    </div>
+  </header>
+
+  <main id="makeEventScreen">
+    <form id="eventForm">
+      <label for="eventTitle">
+        <input type="text" id="eventTitle" placeholder="Titel" name="eventTitle" required></label>
+
+      <br>
+      <label for="postalcode">
+        <input type="number" id="postalcode" placeholder="Postleitzahl" name="postalcode" required></label>
+
+      <br>
+      <label for="numberofguests">
+        <input type="number" id="numberofguests" placeholder="Gästeanzahl" name="numberofguests" required></label>
+
+      <br>
+      <textarea rows="8" id="description" placeholder="Beschreibe dein Event!"></textarea>
+
+      <br>
+      <div>
+        <input id="sumitEvent" type="submit" value="Event Posten">
+      </div>
+    </form>
+
+  </main>
+
+</body>
+</html>

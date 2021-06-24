@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let loadEvents = function (eventID, user) {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/" + user.userID;
+                let requestURL = "http://localhost:3000/event/" + id.toString();
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
