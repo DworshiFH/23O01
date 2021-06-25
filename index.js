@@ -27,7 +27,7 @@ app.use(session({
     })
 );
 app.use('/', authRoute);
-app.use('/event', eventRoute);
+app.use('/', eventRoute);
 
 
 app.listen(3000, () => console.log('Server up and Running!'));

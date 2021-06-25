@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-
     function getCookie(c_name) {
         if (document.cookie.length > 0) {
             c_start = document.cookie.indexOf(c_name + "=");
@@ -42,10 +41,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 let requestURL = "http://localhost:3000/user/" + id.toString();
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
-                request.setRequestHeader('Access-Control-Allow-Origin', '*');
-                request.setRequestHeader("Content-Type", "application/json");
-                request.setRequestHeader("Accept", "application/json");
-                request.setRequestHeader('Authorization', localStorage.getItem('token'));
                 request.responseType = "json";
                 request.send();
 

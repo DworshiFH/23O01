@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const User = require('./Model/User');
-const jwt = require('jsonwebtoken');
 const {registerValidation, loginValidation} = require('./validation');
 const bcrypt = require('bcryptjs');
 const verify = require('./Routes/verifyToken');
 const loggedIn = require('./Routes/loggedIn');
 const path = require('path');
+const objectID = require('mongodb').ObjectID;
 
 //REGISTER
 router.post('/user/register', async (req, res) => {
@@ -14,7 +14,6 @@ router.post('/user/register', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     //Check if the user already in the database
-    console.log(req.body);
     const emailExist = await User.findOne({email: req.body.email});
     if (emailExist) return res.status(400).send('This email is already registered!');
 
@@ -34,7 +33,6 @@ router.post('/user/register', async (req, res) => {
         res.send('Added user with ID: ' + user._id);
     }
     catch(err){
-        console.log("test");
         res.status(400).send(err);
     }
 });
@@ -95,6 +93,40 @@ router.get('/', (req, res) =>{
 
 router.get('/myprofile', verify, (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/profile.html'))
+})
+
+//UPDATE USER DATA
+router.put('/user/:id', async(req,res) => {
+    //Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    const item = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: hashedPassword}
+
+    try{
+        await User.updateOne({"_id": objectID(req.params.id)}, 
+        {$set: item});
+
+        res.send('User data successfully updated!');
+    }
+    catch(err){
+        res.status(400).send(err);
+    }
+})
+
+//DELETE USER
+router.delete('/user/:id', async(req,res) => {
+    try{
+        await User.deleteOne({"_id": objectID(req.params.id)});
+        res.send('User successfully deleted!');
+    }
+    catch(err){
+        res.status(400).send(err);
+    }
 })
 
 module.exports = router;

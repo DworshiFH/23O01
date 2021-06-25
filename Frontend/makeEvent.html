@@ -5,7 +5,7 @@
   <title>Event Posten</title>
   <link rel="stylesheet" href="makeEvent.css">
   <script src="./sidebar.js"></script>
-  <script src="./makeEvent.js"></script>
+  <script src="./makeEvent.js" defer></script>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="./profile.html">Mein Profil</a>
-      <a href="./makeEvent.html">Party Erstellen</a>
+      <a href="http://localhost:3000/event">Party Erstellen</a>
       <a href="#">Freunde</a>
       <a href="#">Kontakt</a>
     </div>
@@ -33,6 +33,10 @@
     <form id="eventForm">
       <label for="eventTitle">
         <input type="text" id="eventTitle" placeholder="Titel" name="eventTitle" required></label>
+
+      <br>
+      <label for="location">
+        <input type="text" id="location" placeholder="location" name="location" required></label>
 
       <br>
       <label for="postalcode">

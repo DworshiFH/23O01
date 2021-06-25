@@ -4,13 +4,14 @@ const {eventValidation} = require('../validation');
 const User = require('../Model/User');
 const path = require('path')
 const verify = require('./verifyToken');
+const objectID = require('mongodb').ObjectID;
 
 
-router.post('/', verify, async (req, res) => {
+router.post('/event/post', verify, async (req, res) => {
     //Validation
     const {error} = eventValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    
+
     //Create new event
     const event = new Event({
         title: req.body.title,
@@ -18,18 +19,29 @@ router.post('/', verify, async (req, res) => {
         location: req.body.location,
         postalcode: req.body.postalcode,
         numberofguests: req.body.numberofguests,
-        user: User._id
+        user: req.session.userID
     });
     try{
         const savedEvent = await event.save();
-        res.send('Added event with ID: ' + event._id);
+        return res.json({status: 'ok', id: event._id});
     }
     catch(err){
         res.status(400).send(err);
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/event', verify, async(req, res) =>{
+    res.sendFile(path.join(__dirname, '../Frontend/makeEvent.html'));
+})
+
+//GET MY EVENTS
+router.get('/myevents', verify, async(req, res) =>{
+    let myEvents = await Event.find({user: objectID(req.session.userID)});
+
+    console.log(myEvents);
+})
+
+router.get('/event/:id', async (req, res) => {
     try{
         const event = await Event.findById(req.params.id);
         if(!event) return res.status(400).send('Event not found!');
@@ -40,7 +52,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/events', async (req, res) => {
     Event.find({}, function(err, events) {
         var eventMap = {};
         var i = 1;
@@ -52,8 +64,39 @@ router.get('/', async (req, res) => {
     
         res.send(eventMap);  
         
-      });
-      //res.sendFile(path.join(__dirname, "../Frontend/login.html"));
+    });
+
+      res.sendFile(path.join(__dirname, "../Frontend/login.html"));
 });
+
+//UPDATE EVENT DATA
+router.put('/event/:id', verify, async(req,res) => {
+    const item = {
+        title: req.body.title,
+        description: req.body.description,
+        location: req.body.location,
+        postalcode: req.body.postalcode}
+
+    try{
+        await Event.updateOne({"_id": objectID(req.params.id)}, 
+        {$set: item});
+
+        res.send('Event data successfully updated!');
+    }
+    catch(err){
+        res.status(400).send(err);
+    }
+})
+
+//DELETE EVENT
+router.delete('/event/:id', verify, async(req,res) => {
+    try{
+        await Event.deleteOne({"_id": objectID(req.params.id)});
+        res.send('Event successfully deleted!');
+    }
+    catch(err){
+        res.status(400).send(err);
+    }
+})
 
 module.exports = router;
