@@ -28,7 +28,7 @@ async function signInUser(event){
         }).then((res) => res.json());
 
         if(result.status === 'ok'){
-            localStorage.setItem('token', result.data);
+            createCookie('id', result.id);
             alert('Succesfully logged in!');
             window.location.replace('http://localhost:3000/');
         }
@@ -37,4 +37,17 @@ async function signInUser(event){
             alert('Wrong Username or Password:(');
         }
     }
+}
+
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
 }

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const authRoute = require('./auth');
 const eventRoute = require('./Routes/events');
 const dotenv = require('dotenv');
+const session = require('express-session');
 
 dotenv.config();
 
@@ -19,6 +20,12 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopol
 app.use(express.json());
 app.use(express.static("Frontend"));
 app.use(express.static("/"));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+    })
+);
 app.use('/', authRoute);
 app.use('/event', eventRoute);
 

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const {registerValidation, loginValidation} = require('./validation');
 const bcrypt = require('bcryptjs');
 const verify = require('./Routes/verifyToken');
+const loggedIn = require('./Routes/loggedIn');
 const path = require('path');
 
 //REGISTER
@@ -38,7 +39,7 @@ router.post('/user/register', async (req, res) => {
     }
 });
 
-router.get('/register', async (req, res) => {
+router.get('/register', loggedIn, async (req, res) => {
     res.sendFile(path.join(__dirname, './Frontend/signup.html'));
 });
 
@@ -56,24 +57,23 @@ router.post('/user/login', async (req, res) => {
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Incorrect Email or Password!');
 
-    //Create and assign a token
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('token', token);
+    //Assing values to the session
+    req.session.userID = user._id;
+    req.session.isAuth = true;
 
-    console.log(token);
-
-    //Add token to header for restricted routes
-    const config = {
-        headers: {
-            Authorization: 'Bearer ' + token
-        }
-    }
-
-    return res.json({status: 'ok', data: token});
+    return res.json({status: 'ok', id: user._id});
 });
 
-router.get('/login', async (req, res) => {
+router.get('/login', loggedIn, async (req, res) => {
     res.sendFile(path.join(__dirname, "./Frontend/login.html"));
+})
+
+//LOGOUT
+router.post('/user/logout', async (req, res) => {
+    req.session.destroy((err) =>{
+        if(err) throw err;
+        res.redirect('/');
+    });
 })
 
 //Get User by id
