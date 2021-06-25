@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let loadEvents = function () {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/" + id.toString();
+                let requestURL = "http://localhost:3000/event/" + id.toString(); //TODO Richard: URL
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -59,12 +59,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }
 
-        updateEvent(event) {
-
-        }
-
         deleteEvent(event) {
-
+            let requestURL = "http://localhost:3000/event/" + event.eventID.toString(); //TODO Richard: URL
+            let request = new XMLHttpRequest();
+            request.open("DELETE", requestURL);
+            request.responseType = "json";
+            request.send();
+            location.reload();
         }
 
         addEventToScreen(event) {
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.eventTitle = document.createElement("label");
             this.eventTitleInput = document.createElement("input");
             this.eventTitleInput.type="text";
-            this.eventTitleInput.id="eventTitel_"+event.eventID;
+            this.eventTitleInput.id="eventTitle_"+event.eventID;
             this.eventTitleInput.placeholder="Titel";
             this.eventTitleInput.name="eventTitle";
             this.eventTitleInput.required = true;
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.updateButton.type = "submit";
             this.updateButton.value = "Event Aktualisieren."
             this.updateButton.onclick = event => {
-                myEventsScreen.updateEvent(event);
+                updateEvent(event);
             }
             this.form.appendChild(this.updateButton);
             this.form.appendChild(document.createElement("br"));
@@ -160,3 +161,49 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     const myEventsScreen = new MyEventsScreen();
 });
+
+async function updateEvent(event) {
+    event.preventDefault();
+
+    const updateTitle = document.getElementById("eventTitle_" + event.eventID).value;
+    const updateLocation = document.getElementById("location_" + event.eventLocation).value;
+    const updatePostalCode = document.getElementById("postalcode_" + event.eventPostalCode).value;
+    const updateNumberOfGuests = document.getElementById("numberofguests_" + event.eventID).value;
+    const updateDescription = document.getElementById("description_" + event.eventID).value;
+
+    if (updateTitle.length < 5 || updateTitle.length > 255) {
+        alert('Der Titel muss zwischen 5 und 255 Zeichen lang sein!');
+    } else if (updateDescription.length < 5 || updateDescription.length > 10240) {
+        alert('Die Beschreibung muss zwischen 5 und 10240 Zeichen lang sein!');
+    } else if (updatePostalCode.length < 4 || updatePostalCode.length > 6) {
+        alert('Bitte eine korrekte Postleitzahl eingeben!');
+    } else if (updateNumberOfGuests < 1) {
+        alert('Du möchtest keine Gäste haben???');
+    } else if (!updateLocation) {
+        alert('Bitte eine Location angeben!');
+    } else {
+
+        const toSend = JSON.stringify({
+            title: updateTitle,
+            description: updateDescription,
+            location: updateLocation,
+            postalcode: updatePostalCode,
+            numberofguests: updateNumberOfGuests,
+        });
+
+        const result = await fetch('/event/put', { //TODO Richard: URL
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: toSend
+        }).then((res) => res.json());
+
+        if (result.status === 'ok') {
+            alert('Event erfolgreich aktualisiert!');
+            window.location.replace('http://localhost:3000/'); //TODO Richard: URL
+        } else {
+            alert('Irgendwas lief falsch :(');
+        }
+    }
+}
