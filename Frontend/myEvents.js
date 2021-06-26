@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
         deleteEvent(event) {
-            let requestURL = "http://localhost:3000/event/" + event.eventID.toString(); //TODO Richard: URL
+            let requestURL = "http://localhost:3000/event/" + event.eventID.toString();
             let request = new XMLHttpRequest();
             request.open("DELETE", requestURL);
             request.responseType = "json";
@@ -149,9 +149,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.updateButton.id = "updateEvent_" + event.eventID;
             this.updateButton.type = "submit";
             this.updateButton.value = "Event Aktualisieren."
-            this.updateButton.onclick = event => {
-                updateEvent(event);
-            }
+            this.updateButton.addEventListener('click', updateEvent(myEvent));
             this.form.appendChild(this.updateButton);
             this.form.appendChild(document.createElement("br"));
             //delete Button
@@ -175,11 +173,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 async function updateEvent(event) {
     event.preventDefault();
 
-    const updateTitle = document.getElementById("eventTitle_" + event.eventID).value;
-    const updateLocation = document.getElementById("location_" + event.eventLocation).value;
-    const updatePostalCode = document.getElementById("postalcode_" + event.eventPostalCode).value;
-    const updateNumberOfGuests = document.getElementById("numberofguests_" + event.eventID).value;
-    const updateDescription = document.getElementById("description_" + event.eventID).value;
+    const updateTitle = document.getElementById("eventTitle_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
+    const updateLocation = document.getElementById("location_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
+    const updatePostalCode = document.getElementById("postalcode_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
+    const updateNumberOfGuests = document.getElementById("numberofguests_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
+    const updateDescription = document.getElementById("description_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
 
     if (updateTitle.length < 5 || updateTitle.length > 255) {
         alert('Der Titel muss zwischen 5 und 255 Zeichen lang sein!');
@@ -199,7 +197,6 @@ async function updateEvent(event) {
             location: updateLocation,
             postalcode: updatePostalCode,
             numberofguests: updateNumberOfGuests,
-            user: id
         });
 
         const result = await fetch('/event/put', { //TODO Richard: URL
