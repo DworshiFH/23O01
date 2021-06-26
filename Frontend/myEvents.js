@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return "";
     }
 
-    const id = getCookie('id');
+    const userID = getCookie('id');
     let FE_ID = 0;
 
     class Event{
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let loadEvents = function () {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/event/" + id.toString(); //TODO Richard: URL
+                let requestURL = "http://localhost:3000/myevents/";
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
@@ -189,6 +189,7 @@ async function updateEvent(event) {
             location: updateLocation,
             postalcode: updatePostalCode,
             numberofguests: updateNumberOfGuests,
+            user: id
         });
 
         const result = await fetch('/event/put', { //TODO Richard: URL
@@ -201,7 +202,7 @@ async function updateEvent(event) {
 
         if (result.status === 'ok') {
             alert('Event erfolgreich aktualisiert!');
-            window.location.replace('http://localhost:3000/'); //TODO Richard: URL
+            window.location.replace('http://localhost:3000/myevents');
         } else {
             alert('Irgendwas lief falsch :(');
         }

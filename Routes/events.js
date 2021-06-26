@@ -39,6 +39,8 @@ router.get('/myevents', verify, async(req, res) =>{
     let myEvents = await Event.find({user: objectID(req.session.userID)});
 
     console.log(myEvents);
+
+    res.sendFile(path.join(__dirname, '../Frontend/myEvents.html'));
 })
 
 router.get('/event/:id', async (req, res) => {
