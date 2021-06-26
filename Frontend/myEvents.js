@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.locationInput.placeholder = "Location";
             this.locationInput.name = "location";
             this.locationInput.required = true;
-            this.locationInput.value = event.location;
+            this.locationInput.value = event.eventLocation;
             this.location.appendChild(this.locationInput);
             this.form.appendChild(this.location);
             this.form.appendChild(document.createElement("br"));
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.postalcodeInput.placeholder = "Postleitzahl";
             this.postalcodeInput.name = "postalcode";
             this.postalcodeInput.required = true;
-            this.postalcodeInput.value = event.postalcode;
+            this.postalcodeInput.value = event.eventPostalCode;
             this.postalcode.appendChild(this.postalcodeInput);
             this.form.appendChild(this.postalcode);
             this.form.appendChild(document.createElement("br"));
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //delete Button
             this.deleteButton = document.createElement("input");
             this.descriptionInput.id = "deleteEvent_" + event.eventID;
-            this.deleteButton.type = "delete";
+            this.deleteButton.type = "submit";
             this.deleteButton.value = "Event Löschen :(";
             this.deleteButton.onclick = event => {
                 myEventsScreen.deleteEvent(event);
