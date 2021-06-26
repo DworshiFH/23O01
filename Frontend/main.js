@@ -29,9 +29,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     const cookie = getCookie('id');
 
-    let eventsOnScreen = [];
-    let FE_ID = 1;
-
     const header = document.getElementById('header');
     let logout = document.getElementById('logoutForm');
 
@@ -74,54 +71,49 @@ document.addEventListener("DOMContentLoaded", function (event) {
         header.appendChild(signUpButton);
     }
 
-    class Event{
-        constructor(eventTitle, eventDesc, eventLocation, eventPostalCode) {
-            FE_ID++;
-            this.FE_ID = FE_ID;
+    class MyEvent{
+        constructor(eventID, eventTitle, eventDesc, eventLocation, eventPostalCode, eventNumberOfGuests) {
+            this.eventID = eventID;
             this.eventTitle = eventTitle; //string
             this.eventDesc = eventDesc; //string
             this.eventLocation = eventLocation; //string
             this.eventPostalCode = eventPostalCode; //int
+            this.eventNumberOfGuests = eventNumberOfGuests; //int
             //this.eventPostingDate = null;
         }
     }
 
     class Dashboard {
         constructor() {
-            this.mainEventScreen = document.getElementById("mainEventScreen");
+            this.eventsScreen = document.getElementById("myEventsScreen");
 
+            let loadEvents = function () {
+                let myEvent = new MyEvent;
 
-            let loadNewEvent = function (eventID){
-                let event = new Event;
-
-                let requestURL = "http://localhost:3000/event/";
+                let requestURL = "http://localhost:3000/events/";
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
                 request.send();
 
                 request.onload = function () {
-                    let JSONEvent = request.response;
+                    let JSONEventArray = request.response;
+                    console.log(request);
 
-                    event.eventTitle = JSONEvent["title"]; //string
-                    event.eventDesc = JSONEvent["description"]; //string
-                    event.eventLocation = JSONEvent["location"]; //string
-                    event.eventPostalCode = JSONEvent["postalcode"]; //int
-                    event.numberOfGuests = JSONEvent["numberofguests"];
-                    event.user = JSONEvent["user"];
-                    //event.eventPostingDate = JSONEvent["Date"];
-                    //TODO implement rest of JSON to object translation
+                    for(var i = 0; i < JSONEventArray.length; i++) {
+                        var JSONevent = JSONEventArray[i];
+                        myEvent.eventID = JSONevent["_id"];
+                        myEvent.eventTitle = JSONevent["title"]; //string
+                        myEvent.eventDesc = JSONevent["description"];
+                        myEvent.eventLocation = JSONevent["location"];
+                        myEvent.eventPostalCode = JSONevent["postalcode"];
+                        myEvent.eventNumberOfGuests = JSONevent["numberofguests"];
 
-                    dashboard.addEventToScreen(event);
+                        dashboard.addEventToScreen(myEvent);
+                    }
                 }
             }
-
-            window.addEventListener('scroll', function () {
-                if (window.scrollY >= document.getElementById("mainEventScreen").clientHeight - window.innerHeight - 10) {
-                    loadNewEvent(FE_ID);
-                    FE_ID++;
-                }
-            });
+            loadEvents();
         }
 
         addEventToScreen(event){

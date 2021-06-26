@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return "";
     }
 
-    const userID = getCookie('id');
-
     class MyEvent{
         constructor(eventID ,eventTitle, eventDesc, eventLocation, eventPostalCode, eventNumberOfGuests) {
             this.eventID = eventID;
@@ -41,12 +39,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.responseType = "json";
                 request.send();
 
-                console.log(request.response);
-
                 request.onload = function () {
                     let JSONEventArray = request.response;
-                    console.log(request.response);
-                    console.log(JSONEventArray);
 
                     for(var i = 0; i < JSONEventArray.length; i++) {
                         var JSONevent = JSONEventArray[i];
@@ -56,8 +50,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         myEvent.eventLocation = JSONevent["location"];
                         myEvent.eventPostalCode = JSONevent["postalcode"];
                         myEvent.eventNumberOfGuests = JSONevent["numberofguests"];
-
-                        console.log(myEvent);
 
                         myEventsScreen.addEventToScreen(myEvent);
                     }

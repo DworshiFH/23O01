@@ -55,5 +55,4 @@ async function makeEvent(event){
         console.log(result);
 
     }
-
 }

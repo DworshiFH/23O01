@@ -57,18 +57,9 @@ router.get('/event/:id', async (req, res) => {
 });
 
 router.get('/events', async (req, res) => {
-    Event.find({}, function(err, events) {
-        var eventMap = {};
-        var i = 1;
-    
-        events.forEach(function(event) {
-          eventMap[i] = event;
-          i++;
-        });
-    
-        res.send(eventMap);  
-        
-    });
+    let events = await Event.find({});
+
+    res.json(events);
 });
 
 //UPDATE EVENT DATA
