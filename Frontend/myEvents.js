@@ -15,12 +15,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     const userID = getCookie('id');
-    let FE_ID = 0;
 
-    class Event{
+    class MyEvent{
         constructor(eventID ,eventTitle, eventDesc, eventLocation, eventPostalCode, eventNumberOfGuests) {
-            FE_ID++;
-            this.FE_ID = FE_ID;
             this.eventID = eventID;
             this.eventTitle = eventTitle; //string
             this.eventDesc = eventDesc; //string
@@ -36,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.eventsScreen = document.getElementById("myEventsScreen");
 
             let loadEvents = function () {
-                let event = new Event;
+                let myEvent = new MyEvent;
 
                 let requestURL = "http://localhost:3000/userevents/";
                 let request = new XMLHttpRequest();
@@ -53,24 +50,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                     for(var i = 0; i < JSONEventArray.length; i++) {
                         var JSONevent = JSONEventArray[i];
-                        event.eventID = JSONevent["_id"];
-                        event.eventTitle = JSONevent["title"]; //string
-                        event.eventDesc = JSONevent["description"];
-                        event.eventLocation = JSONevent["location"];
-                        event.eventPostalCode = JSONevent["postalcode"];
-                        event.eventNumberOfGuests = JSONevent["numberofguests"];
+                        myEvent.eventID = JSONevent["_id"];
+                        myEvent.eventTitle = JSONevent["title"]; //string
+                        myEvent.eventDesc = JSONevent["description"];
+                        myEvent.eventLocation = JSONevent["location"];
+                        myEvent.eventPostalCode = JSONevent["postalcode"];
+                        myEvent.eventNumberOfGuests = JSONevent["numberofguests"];
 
-                        console.log(event);
+                        console.log(myEvent);
 
-                        myEventsScreen.addEventToScreen(event);
+                        myEventsScreen.addEventToScreen(myEvent);
                     }
                 }
             }
             loadEvents();
         }
 
-        deleteEvent(event) {
-            let requestURL = "http://localhost:3000/event/" + event.eventID.toString();
+        deleteEvent(myEvent) {
+            let requestURL = "http://localhost:3000/event/" + myEvent.eventID.toString();
             let request = new XMLHttpRequest();
             request.open("DELETE", requestURL);
             request.responseType = "json";
@@ -78,12 +75,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             location.reload();
         }
 
-        addEventToScreen(event) {
+        addEventToScreen(myEvent) {
             this.form = document.createElement("form");
 
             //header
             this.header = document.createElement("h2");
-            this.header.textContent = event.eventTitle;
+            this.header.textContent = myEvent.eventTitle;
             this.form.appendChild(this.header);
 
             //FORM
@@ -91,11 +88,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.eventTitle = document.createElement("label");
             this.eventTitleInput = document.createElement("input");
             this.eventTitleInput.type="text";
-            this.eventTitleInput.id="eventTitle_"+event.eventID;
+            this.eventTitleInput.id="eventTitle_"+myEvent.eventID;
             this.eventTitleInput.placeholder="Titel";
             this.eventTitleInput.name="eventTitle";
             this.eventTitleInput.required = true;
-            this.eventTitleInput.value = event.eventTitle;
+            this.eventTitleInput.value = myEvent.eventTitle;
             this.eventTitle.appendChild(this.eventTitleInput);
             this.form.appendChild(this.eventTitle);
             this.form.appendChild(document.createElement("br"));
@@ -103,11 +100,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.location = document.createElement("label");
             this.locationInput = document.createElement("input");
             this.locationInput.type="text";
-            this.locationInput.id="location_" + event.eventID;
+            this.locationInput.id="location_" + myEvent.eventID;
             this.locationInput.placeholder = "Location";
             this.locationInput.name = "location";
             this.locationInput.required = true;
-            this.locationInput.value = event.eventLocation;
+            this.locationInput.value = myEvent.eventLocation;
             this.location.appendChild(this.locationInput);
             this.form.appendChild(this.location);
             this.form.appendChild(document.createElement("br"));
@@ -115,11 +112,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.postalcode = document.createElement("label");
             this.postalcodeInput = document.createElement("input");
             this.postalcodeInput.type="number";
-            this.postalcodeInput.id="postalcode_" + event.eventID;
+            this.postalcodeInput.id="postalcode_" + myEvent.eventID;
             this.postalcodeInput.placeholder = "Postleitzahl";
             this.postalcodeInput.name = "postalcode";
             this.postalcodeInput.required = true;
-            this.postalcodeInput.value = event.eventPostalCode;
+            this.postalcodeInput.value = myEvent.eventPostalCode;
             this.postalcode.appendChild(this.postalcodeInput);
             this.form.appendChild(this.postalcode);
             this.form.appendChild(document.createElement("br"));
@@ -127,38 +124,40 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.numberOfGuests = document.createElement("label");
             this.numberOfGuestsInput = document.createElement("input");
             this.numberOfGuestsInput.type="number";
-            this.numberOfGuestsInput.id="numberofguests_" + event.eventID;
+            this.numberOfGuestsInput.id="numberofguests_" + myEvent.eventID;
             this.numberOfGuestsInput.placeholder = "Gaesteanzahl";
             this.numberOfGuestsInput.name = "numberofguests";
             this.numberOfGuestsInput.required = true;
-            this.numberOfGuestsInput.value = event.eventNumberOfGuests;
+            this.numberOfGuestsInput.value = myEvent.eventNumberOfGuests;
             this.numberOfGuests.appendChild(this.numberOfGuestsInput);
             this.form.appendChild(this.numberOfGuests);
             //description
             this.description = document.createElement("label");
             this.descriptionInput = document.createElement("textarea");
             this.descriptionInput.rows = 8;
-            this.descriptionInput.id="description_" + event.eventID;
+            this.descriptionInput.id="description_" + myEvent.eventID;
             this.descriptionInput.placeholder = "Beschreibe dein Event!";
-            this.descriptionInput.value = event.eventDesc;
+            this.descriptionInput.value = myEvent.eventDesc;
             this.description.appendChild(this.descriptionInput);
             this.form.appendChild(this.description);
             this.form.appendChild(document.createElement("br"));
             //update Button
             this.updateButton = document.createElement("input");
-            this.updateButton.id = "updateEvent_" + event.eventID;
+            this.updateButton.id = "updateEvent_" + myEvent.eventID;
             this.updateButton.type = "submit";
             this.updateButton.value = "Event Aktualisieren."
-            this.updateButton.addEventListener('click', updateEvent(myEvent));
+            this.deleteButton.onclick = event => {
+                updateEvent(myEvent);
+            }
             this.form.appendChild(this.updateButton);
             this.form.appendChild(document.createElement("br"));
             //delete Button
             this.deleteButton = document.createElement("input");
-            this.descriptionInput.id = "deleteEvent_" + event.eventID;
+            this.descriptionInput.id = "deleteEvent_" + myEvent.eventID;
             this.deleteButton.type = "submit";
             this.deleteButton.value = "Event Löschen :(";
             this.deleteButton.onclick = event => {
-                myEventsScreen.deleteEvent(event);
+                myEventsScreen.deleteEvent(myEvent);
             }
             this.form.appendChild(this.deleteButton);
             this.form.appendChild(document.createElement("br"));
@@ -170,14 +169,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const myEventsScreen = new MyEventsScreen();
 });
 
-async function updateEvent(event) {
-    event.preventDefault();
+async function updateEvent(myEvent) {
+    myEvent.preventDefault();
 
-    const updateTitle = document.getElementById("eventTitle_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
-    const updateLocation = document.getElementById("location_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
-    const updatePostalCode = document.getElementById("postalcode_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
-    const updateNumberOfGuests = document.getElementById("numberofguests_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
-    const updateDescription = document.getElementById("description_60d5f819b8bb7b57e4bdf38f"/* + event.eventID*/).value;
+    const updateTitle = document.getElementById("eventTitle_60d5f819b8bb7b57e4bdf38f" + myEvent.eventID).value;
+    const updateLocation = document.getElementById("location_60d5f819b8bb7b57e4bdf38f" + myEvent.eventID).value;
+    const updatePostalCode = document.getElementById("postalcode_60d5f819b8bb7b57e4bdf38f" + myEvent.eventID).value;
+    const updateNumberOfGuests = document.getElementById("numberofguests_60d5f819b8bb7b57e4bdf38f" + myEvent.eventID).value;
+    const updateDescription = document.getElementById("description_60d5f819b8bb7b57e4bdf38f" + myEvent.eventID).value;
 
     if (updateTitle.length < 5 || updateTitle.length > 255) {
         alert('Der Titel muss zwischen 5 und 255 Zeichen lang sein!');
