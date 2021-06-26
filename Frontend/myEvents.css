@@ -1,4 +1,4 @@
-#myEventsScreen{
+#myEventsScreen.form{
     box-sizing: border-box;
     position: fixed;
     top: 50px;
@@ -19,7 +19,6 @@ textarea{
     font-family: "Comic Sans MS", serif;
     box-sizing: border-box;
     width: 100%;
-    right: 6px; /* No "right" property does seem to have any effect. */
     resize: none;
     margin-bottom: 15px;
 }

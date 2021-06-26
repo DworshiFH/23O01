@@ -40,6 +40,8 @@ router.get('/myevents', verify, async(req, res) =>{
 
     console.log(myEvents);
 
+    res.send(myEvents);
+
     res.sendFile(path.join(__dirname, '../Frontend/myEvents.html'));
 })
 

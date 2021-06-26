@@ -45,18 +45,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.send();
 
                 request.onload = function () {
-                    let JSONEvent = request.response;
+                    let JSONEventArray = [request.response];
 
-                    event.eventID = JSONEvent["_id"];
-                    event.eventTitle = JSONEvent["title"]; //string
-                    event.eventDesc = JSONEvent["description"];
-                    event.eventLocation = JSONEvent["location"];
-                    event.eventPostalCode = JSONEvent["postalcode"];
-                    event.eventNumberOfGuests = JSONEvent["numberofguests"];
+                    for(var i = 0; i < JSONEventArray.length; i++) {
+                        var event = JSONEventArray[i];
+                        event.eventID = JSONEventArray["_id"];
+                        event.eventTitle = JSONEventArray["title"]; //string
+                        event.eventDesc = JSONEventArray["description"];
+                        event.eventLocation = JSONEventArray["location"];
+                        event.eventPostalCode = JSONEventArray["postalcode"];
+                        event.eventNumberOfGuests = JSONEventArray["numberofguests"];
 
-                    myEventsScreen.addEventToScreen(event);
+                        myEventsScreen.addEventToScreen(event);
+                    }
                 }
             }
+            loadEvents();
         }
 
         deleteEvent(event) {
