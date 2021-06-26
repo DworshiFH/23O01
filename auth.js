@@ -74,7 +74,7 @@ router.post('/user/logout', async (req, res) => {
     });
 })
 
-//Get User by id
+//GET SPECIFIC USER BY ID
 router.get('/user/:id', async(req, res) => {
     try{
     const user = await User.findById(req.params.id);
@@ -87,10 +87,12 @@ router.get('/user/:id', async(req, res) => {
     }
 })
 
+//MAIN PAGE
 router.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/main.html'));
 })
 
+//MY PROFILE PAGE
 router.get('/myprofile', verify, (req, res) =>{
     res.sendFile(path.join(__dirname, './Frontend/profile.html'))
 })

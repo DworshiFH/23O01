@@ -132,37 +132,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.eventImg.src = event.eventImg;
             this.article.appendChild(this.eventImg);*/
 
-            this.p1 = document.createElement("p");
-            this.p1.textContent = event.eventTitle;
-            this.article.appendChild(this.p1);
+            this.h2 = document.createElement("h2");
+            this.h2.textContent = event.eventTitle;
+            this.article.appendChild(this.h2);
             this.p2 = document.createElement("p");
-            this.p2.textContent = event.eventDesc;
+            this.p2.textContent = 'Description: ' + event.eventDesc;
             this.article.appendChild(this.p2);
             this.p3 = document.createElement("p");
-            this.p3.textContent = event.eventLocation;
+            this.p3.textContent = 'Location: ' + event.eventLocation;
             this.article.appendChild(this.p3);
             this.p4 = document.createElement("p");
-            this.p4.textContent = event.eventPostalCode;
+            this.p4.textContent = 'Postal Code: ' + event.eventPostalCode;
             this.article.appendChild(this.p4);
             this.p5 = document.createElement("p");
-            this.p5.textContent = event.numberOfGuests;
+            this.p5.textContent = 'Number of Guests: ' + event.numberOfGuests;
             this.article.appendChild(this.p5);
 
             //TODO add button to go to event page
             /*this.p4 = document.createElement("p");
             this.button = document.createElement("button");
             this.button.type = "button";
-            this.button.id = "showEventButton" + event.FE_ID;
+            this.button.id = "showEventButton_" + event.FE_ID;
             this.buttontext = document.createTextNode("Show Event");
-            this.button.onclick = event => {
-
-            };
+            this.button.onclick =
+                window.location.replace('http://localhost:3000/event/' + event.eventID);
             this.button.appendChild(this.buttontext);
             this.p4.appendChild(this.button);
             this.article.appendChild(this.p4);*/
         }
     }
-
     const dashboard = new Dashboard();
-
 });

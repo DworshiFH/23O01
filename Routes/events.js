@@ -7,6 +7,7 @@ const verify = require('./verifyToken');
 const objectID = require('mongodb').ObjectID;
 
 
+//CREATE NEW EVENT
 router.post('/event/post', verify, async (req, res) => {
     //Validation
     const {error} = eventValidation(req.body);
@@ -45,6 +46,7 @@ router.get('/myevents', verify, async(req, res) =>{
     res.sendFile(path.join(__dirname, '../Frontend/myEvents.html'));
 })
 
+//GET SPECIFIC EVENT BY ITS ID
 router.get('/event/:id', async (req, res) => {
     try{
         const event = await Event.findById(req.params.id);
