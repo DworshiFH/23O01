@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     console.log(JSONEventArray);
 
                     for(var i = 0; i < JSONEventArray.length; i++) {
-                        var event = JSONEventArray[i];
-                        event.eventID = JSONEventArray["_id"];
-                        event.eventTitle = JSONEventArray["title"]; //string
-                        event.eventDesc = JSONEventArray["description"];
-                        event.eventLocation = JSONEventArray["location"];
-                        event.eventPostalCode = JSONEventArray["postalcode"];
-                        event.eventNumberOfGuests = JSONEventArray["numberofguests"];
+                        var JSONevent = JSONEventArray[i];
+                        event.eventID = JSONevent["_id"];
+                        event.eventTitle = JSONevent["title"]; //string
+                        event.eventDesc = JSONevent["description"];
+                        event.eventLocation = JSONevent["location"];
+                        event.eventPostalCode = JSONevent["postalcode"];
+                        event.eventNumberOfGuests = JSONevent["numberofguests"];
 
                         console.log(event);
 
