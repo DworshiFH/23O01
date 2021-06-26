@@ -38,11 +38,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let loadEvents = function () {
                 let event = new Event;
 
-                let requestURL = "http://localhost:3000/myevents/";
+                let requestURL = "http://localhost:3000/userevents/";
                 let request = new XMLHttpRequest();
                 request.open("GET", requestURL);
                 request.responseType = "json";
                 request.send();
+
+                console.log(request.response);
 
                 request.onload = function () {
                     let JSONEventArray = request.response;
@@ -64,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     }
                 }
             }
+            loadEvents();
         }
-        loadEvents();
 
         deleteEvent(event) {
             let requestURL = "http://localhost:3000/event/" + event.eventID.toString(); //TODO Richard: URL
