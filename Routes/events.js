@@ -38,8 +38,6 @@ router.get('/event', verify, async(req, res) =>{
 router.get('/userevents', verify, async (req, res) =>{
     let myEvents = await Event.find({user: objectID(req.session.userID)});
 
-    console.log(myEvents);
-
     res.json(myEvents);
 })
 
@@ -85,7 +83,7 @@ router.put('/event/:id', verify, async(req,res) => {
         await Event.updateOne({"_id": objectID(req.params.id)}, 
         {$set: item});
 
-        res.send('Event data successfully updated!');
+        return res.json({status: 'ok', id: req.params.id});
     }
     catch(err){
         res.status(400).send(err);
