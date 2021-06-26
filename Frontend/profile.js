@@ -58,23 +58,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             loadNewProfile();
 
-            let loadEvents = function (eventID, user) {
-                let event = new Event;
-
-                let requestURL = "http://localhost:3000/event/" + id.toString();
-                let request = new XMLHttpRequest();
-                request.open("GET", requestURL);
-                request.responseType = "json";
-                request.send();
-
-                request.onload = function () {
-                    let JSONEvent = request.response;
-
-                    event.eventTitle = JSONEvent["title"]; //string
-
-                    profileScreen.addEventToScreen(event);
-                }
-            }
         }
 
         addProfileToScreen(profile) {
@@ -94,13 +77,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.article.appendChild(this.email);
 
             this.main.appendChild(this.article);
-        }
-
-        addEventToScreen(event) {
-            this.main = document.getElementById("profileScreen");
-
-            this.article = document.createElement("article");
-            this.name = document.createElement("p");
         }
     }
 

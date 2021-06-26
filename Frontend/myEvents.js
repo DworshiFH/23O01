@@ -45,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.send();
 
                 request.onload = function () {
-                    let JSONEventArray = [request.response];
+                    let JSONEventArray = request.response;
+                    console.log(request.response);
+                    console.log(JSONEventArray);
 
                     for(var i = 0; i < JSONEventArray.length; i++) {
                         var event = JSONEventArray[i];
@@ -56,12 +58,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         event.eventPostalCode = JSONEventArray["postalcode"];
                         event.eventNumberOfGuests = JSONEventArray["numberofguests"];
 
+                        console.log(event);
+
                         myEventsScreen.addEventToScreen(event);
                     }
                 }
             }
-            loadEvents();
         }
+        loadEvents();
 
         deleteEvent(event) {
             let requestURL = "http://localhost:3000/event/" + event.eventID.toString(); //TODO Richard: URL

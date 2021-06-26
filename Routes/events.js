@@ -40,7 +40,7 @@ router.get('/myevents', verify, async(req, res) =>{
 
     console.log(myEvents);
 
-    res.send(myEvents);
+    res.json(myEvents);
 
     res.sendFile(path.join(__dirname, '../Frontend/myEvents.html'));
 })
@@ -69,8 +69,6 @@ router.get('/events', async (req, res) => {
         res.send(eventMap);  
         
     });
-
-      res.sendFile(path.join(__dirname, "../Frontend/login.html"));
 });
 
 //UPDATE EVENT DATA
