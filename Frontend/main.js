@@ -98,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 request.onload = function () {
                     let JSONEventArray = request.response;
-                    console.log(request);
 
                     for(var i = 0; i < JSONEventArray.length; i++) {
                         var JSONevent = JSONEventArray[i];
@@ -145,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.p4.textContent = 'Postal Code: ' + event.eventPostalCode;
             this.article.appendChild(this.p4);
             this.p5 = document.createElement("p");
-            this.p5.textContent = 'Number of Guests: ' + event.numberOfGuests;
+            this.p5.textContent = 'Number of Guests: ' + event.eventNumberOfGuests;
             this.article.appendChild(this.p5);
 
             //TODO add button to go to event page
