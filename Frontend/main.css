@@ -98,6 +98,8 @@ img{
 p{
     display: block;
     text-align: left;
+    word-wrap: normal;
+    word-break-wrap: normal;
     /*stuff*/
 }
 @media (max-width: 800px) {
@@ -105,6 +107,9 @@ p{
         visibility: hidden;
     }
     .grid-container  {
+        white-space: nowrap;
+        max-width: 750px;
+        min-width: 450px;
         padding-right: 0;
     }
 }
@@ -114,6 +119,11 @@ p{
         visibility: hidden;
     }
     .grid-container  {
+        white-space: nowrap;
+
+        padding-right: 0;
+        max-width: 550px;
+        min-width: 350px;
         grid-template-areas:
         'left'
         'right';
