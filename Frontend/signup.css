@@ -99,3 +99,9 @@ p{
 ::placeholder{
     color: black;
 }
+
+@media (pointer:none), (pointer:coarse){
+    #search{
+        visibility: hidden;
+    }
+}

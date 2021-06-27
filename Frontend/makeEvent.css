@@ -203,3 +203,9 @@ p{
         padding-right: 10px;
     }
 }
+
+@media (pointer:none), (pointer:coarse){
+    #search{
+        visibility: hidden;
+    }
+}
