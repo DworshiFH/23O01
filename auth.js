@@ -47,7 +47,7 @@ router.post('/user/login', async (req, res) => {
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    //Check if the user is already in the database
+    //Check if the user is in the database
     const user = await User.findOne({email: req.body.email});
     if (!user) return res.status(400).send('Incorrect Email or Password!');
 
