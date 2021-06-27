@@ -3,19 +3,9 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient(black, blue, red, black);
+    background: linear-gradient(100deg, #4568dc ,#b06ab3);
 }
 
-#codename{
-    padding: 40px;
-    position: absolute;
-    top: 10%;
-    left: 42%;
-    color: white;
-    text-align: center;
-    font-size: 70px;
-    z-index: 999;
-}
 
 .box, .grid-container{
     width: 300px;
@@ -24,7 +14,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #191919;
+    background: transparent;
     text-align: center;
 }
 
@@ -34,7 +24,7 @@ body{
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid blue;
     padding: 14px 10px;
     width: 200px;
     outline: none;
@@ -49,37 +39,63 @@ body{
 }
 
 .box input[type = "submit"]{
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;
-    padding: 14px 40px;
-    width: 200px;
-    outline: none;
+    box-sizing: border-box;
+    width: 15em;
+    height: 3em;
+    font-size: 20px;
+    border-radius: 0.5em;
+    margin: 0.5em;
+    box-shadow: 0 0 1em rgba(0,0,0,0.2);
     color: white;
-    border-radius: 24px;
-    transition: 0.2s;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    line-height: 3em;
+    transition: 0.3s;
     cursor: pointer;
 }
 
-.box input[type = "submit"]:hover{
-    background: #2ecc71;
+
+
+.box input[type = "submit"]:nth-child(odd) {
+    background: linear-gradient(to right, orange, tomato);
+    text-align: left;
+    padding-left: 10%;
+    transform: perspective(500px) rotateY(45deg);
+}
+
+.box input[type = "submit"]:nth-child(even) {
+    background: linear-gradient(to left, orange, tomato);
+    text-align: right;
+    padding-right: 10%;
+    transform: perspective(500px) rotateY(-45deg);
+}
+
+.box input[type = "submit"]:nth-child(odd):hover {
+    transform: perspective(200px) rotateY(45deg);
+    padding-left: 5%;
+}
+
+.box input[type = "submit"]:nth-child(even):hover {
+    transform: perspective(200px) rotateY(-45deg);
+    padding-right: 5%;
 }
 
 #codename{
-    padding: 20px;
+    padding: 40px;
     position: absolute;
-    top: -5%;
-    left: 35.5%;
+    top: -10%;
+    left: 40%;
     color: white;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+
     text-align: center;
-    font-size: 60px;
+    font-size: 70px;
     z-index: 999;
-    color: #3498db;
 }
 
 p{
     color: #3498db;
+}
+::placeholder{
+    color: black;
 }

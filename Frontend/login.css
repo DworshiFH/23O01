@@ -2,7 +2,9 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #34495e;
+    background: linear-gradient(100deg, #4568dc ,#b06ab3);
+    height: 100vh;
+
 }
 
 .box, .grid-container{
@@ -12,8 +14,11 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #191919;
     text-align: center;
+    background: transparent;
+
+
+
 }
 
 #noaccount{
@@ -21,18 +26,14 @@ body{
     top: 170px;
     padding-left: 53px;
     text-align: center;
-    color: #3498db;
+    color: black;
 }
 
 #href_to_signup:visited, href_to_signup:link, href_to_signup:hover, href_to_signup:active{
     color: #3498db;
 }
 
-#logintext{
-    color: white;
-    text-transform: uppercase;
-    font-weight: 500;
-}
+
 
 .box input[type = "email"], .box input[type = "password"]{
     border: 0;
@@ -40,7 +41,7 @@ body{
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid blue;
     padding: 14px 10px;
     width: 200px;
     outline: none;
@@ -55,32 +56,59 @@ body{
 }
 
 .box input[type = "submit"]{
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;
-    padding: 14px 40px;
-    width: 200px;
-    outline: none;
+    box-sizing: border-box;
+    width: 15em;
+    height: 3em;
+    font-size: 20px;
+    border-radius: 0.5em;
+    margin: 0.5em;
+    box-shadow: 0 0 1em rgba(0,0,0,0.2);
     color: white;
-    border-radius: 24px;
-    transition: 0.2s;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    line-height: 3em;
+    transition: 0.3s;
     cursor: pointer;
 }
-
-.box input[type = "submit"]:hover{
-    background: #2ecc71;
+.box input[type = "submit"]:nth-child(odd) {
+    background: linear-gradient(to right, orange, tomato);
+    text-align: left;
+    padding-left: 10%;
+    transform: perspective(500px) rotateY(45deg);
 }
+
+.box input[type = "submit"]:nth-child(even) {
+    background: linear-gradient(to left, orange, tomato);
+    text-align: right;
+    padding-right: 10%;
+    transform: perspective(500px) rotateY(-45deg);
+}
+
+.box input[type = "submit"]:nth-child(odd):hover {
+    transform: perspective(200px) rotateY(45deg);
+    padding-left: 5%;
+}
+
+.box input[type = "submit"]:nth-child(even):hover {
+    transform: perspective(200px) rotateY(-45deg);
+    padding-right: 5%;
+}
+
+
 
 #codename{
     padding: 40px;
     position: absolute;
-    top: 10%;
-    left: 42%;
+    top: 7%;
+    left: 40.5%;
     color: white;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+
     text-align: center;
     font-size: 70px;
     z-index: 999;
 }
+::placeholder{
+    color: black;
+}
+

@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let logout = document.getElementById('logoutForm');
 
     if(cookie){
-        logout.id = 'logout';
+        logout.id = 'logoutForm';
         logout.addEventListener('submit', () =>{
             createCookie('id', '', -1);
             alert('Successfully logged out!');

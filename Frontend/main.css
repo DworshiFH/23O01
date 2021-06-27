@@ -7,8 +7,9 @@ header{
     right: 0;
     width: 100%;
     height: 40px;
-    background-color: #06506b;
+    background: linear-gradient(50deg, #4568dc ,#b06ab3);;
     text-align: left;
+
 }
 #title{
     text-align: left;
@@ -18,6 +19,8 @@ header{
     top: -15px;
     left: 10px;
     color: white;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+
 }
 #search{
     box-sizing: border-box;
@@ -32,6 +35,8 @@ header{
     text-align: left;
     color: grey;
     font-size: 15px;
+    box-shadow: 2px 5px black;
+
 }
 #profile{
     box-sizing: border-box;
@@ -130,21 +135,25 @@ p{
     }
 }
 
-#login, #logout{
+/*#login, #logout{
     position: fixed;
     width: 50px;
     height: 30px;
     right: 45px;
     top: 5px;
-}
+}*/
 
-#signup{
+
+/*#signup{
     position: fixed;
     width: 65px;
     height: 30px;
     right: 100px;
     top: 5px;
-}
+}*/
+
+
+
 
 .sidebar {
     height: 100%; /* 100% Full-height */
@@ -208,3 +217,61 @@ p{
     .sidebar {padding-top: 15px;}
     .sidebar a {font-size: 18px;}
 }
+#login, #logout {
+    background: linear-gradient(to right, gold, mediumpurple);
+    color: white;
+    width: 50px;
+    height: 30px;
+
+    text-align: center;
+
+    font-family: Arial;
+    letter-spacing: 0.2em;
+    border: 1px solid darkgoldenrod;
+    border-radius: 2em;
+    transform: perspective(500px) rotateY(-15deg);
+    text-shadow: 6px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+    position: fixed;
+    overflow: hidden;
+    right: 45px;
+    top: 5px;
+}
+
+#login :hover, #logout:hover {
+    transform: perspective(500px) rotateY(15deg);
+    text-shadow: -6px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: -2px 0 0 5px rgba(0, 0, 0, 0.2);
+}
+#signup {
+    background: linear-gradient(to right, gold, mediumpurple);
+    color: white;
+    position: fixed;
+    width: 65px;
+    height: 30px;
+    right: 100px;
+    top: 5px;
+    text-align: center;
+
+    font-family: "Arabic Typesetting" ;
+    letter-spacing: 0.2em;
+    border: 1px solid darkgoldenrod;
+    border-radius: 2em;
+    transform: perspective(500px) rotateY(-15deg);
+    text-shadow: 6px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+
+    overflow: hidden;
+
+}
+
+#signup:hover {
+    transform: perspective(500px) rotateY(15deg);
+    text-shadow: -6px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: -2px 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
