@@ -98,9 +98,8 @@ body{
 
 #codename{
     padding: 40px;
-    position: absolute;
+    position: relative;
     top: 7%;
-    left: 40.5%;
     color: white;
     text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 
