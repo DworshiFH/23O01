@@ -96,20 +96,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 request.responseType = "json";
                 request.send();
 
-                request.onload = function () {
-                    let JSONEventArray = request.response;
+                request.onreadystatechange = function () {
+                    if(this.readyState === 4 && this.status === 200){
+                        let JSONEventArray = request.response;
 
-                    for(var i = 0; i < JSONEventArray.length; i++) {
-                        var JSONevent = JSONEventArray[i];
-                        myEvent.eventID = JSONevent["_id"];
-                        myEvent.eventTitle = JSONevent["title"]; //string
-                        myEvent.eventDesc = JSONevent["description"];
-                        myEvent.eventLocation = JSONevent["location"];
-                        myEvent.eventPostalCode = JSONevent["postalcode"];
-                        myEvent.eventNumberOfGuests = JSONevent["numberofguests"];
+                        for(var i = 0; i < JSONEventArray.length; i++) {
+                            var JSONevent = JSONEventArray[i];
+                            myEvent.eventID = JSONevent["_id"];
+                            myEvent.eventTitle = JSONevent["title"]; //string
+                            myEvent.eventDesc = JSONevent["description"];
+                            myEvent.eventLocation = JSONevent["location"];
+                            myEvent.eventPostalCode = JSONevent["postalcode"];
+                            myEvent.eventNumberOfGuests = JSONevent["numberofguests"];
 
-                        dashboard.addEventToScreen(myEvent);
+                            dashboard.addEventToScreen(myEvent);
+                        }
                     }
+
                 }
             }
             loadEvents();
