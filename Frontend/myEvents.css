@@ -36,7 +36,7 @@ header{
     margin-bottom: 50px;
     width: 100%;
     height: 40px;
-    background-color: #06506b;
+    background: linear-gradient(50deg, #4568dc ,#b06ab3);
     text-align: left;
 }
 #title{
@@ -47,6 +47,7 @@ header{
     top: -15px;
     left: 10px;
     color: white;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }
 #search{
     box-sizing: border-box;
@@ -186,3 +187,5 @@ p{
         visibility: hidden;
     }
 }
+
+
