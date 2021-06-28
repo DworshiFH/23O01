@@ -41,7 +41,6 @@ router.get('/register', loggedIn, async (req, res) => {
     res.sendFile(path.join(__dirname, './Frontend/signup.html'));
 });
 
-
 //LOGIN
 router.post('/user/login', async (req, res) => {
     const {error} = loginValidation(req.body);

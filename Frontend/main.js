@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return "";
     }
 
-    function createCookie(name, value, days) {
+    function createCookie(name, value, days) { //needed to be able to destroy the cookie upon LOGOUT
         var expires;
         if (days) {
             var date = new Date();
@@ -112,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                             dashboard.addEventToScreen(myEvent);
                         }
                     }
-
                 }
             }
             loadEvents();

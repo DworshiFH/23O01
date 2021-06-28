@@ -32,9 +32,8 @@ async function signInUser(event){
             alert('Succesfully logged in!');
             window.location.replace('http://localhost:3000/');
         }
-
         else{
-            alert('Wrong Username or Password:(');
+            alert('Wrong Username or Password :(');
         }
     }
 }

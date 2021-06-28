@@ -111,9 +111,12 @@ p{
         visibility: hidden;
         display: none;
     }
+    #search{
+        left: 100px;
+    }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 720px) {
 
     .grid-container  {
         white-space: break-spaces;
@@ -124,21 +127,13 @@ p{
         'left'
         'right';
     }
+    #search{
+        width: 280px;
+    }
 }
 
 @media (pointer:none), (pointer:coarse){
 
-    #title{
-        text-align: left;
-        box-sizing: border-box;
-        position: fixed;
-        font-size: 25px;
-        top: -15px;
-        left: 10px;
-        color: white;
-        text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
-
-    }
     #search{
         visibility: hidden;
 
